@@ -221,4 +221,31 @@ class ColorPickerRingView(context: Context, attrs: AttributeSet) : View(context,
             min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
         setMeasuredDimension(size, size)
     }
+
+    fun increaseAngle() {
+        val totalColors = colors.size
+        val sweepAngle = 360F / totalColors
+        val step = sweepAngle / 360 // Bước dịch chuyển 1 độ
+    
+        touchAngle += step
+        if (touchAngle >= 360F) {
+            touchAngle -= 360F
+        }
+        updateSelectedColor()
+        invalidate()
+    }
+    
+    // Khi nút trừ được nhấn
+    fun decreaseAngle() {
+        val totalColors = colors.size
+        val sweepAngle = 360F / totalColors
+        val step = sweepAngle / 360 // Bước dịch chuyển 1 độ
+    
+        touchAngle -= step
+        if (touchAngle < 0) {
+            touchAngle += 360F
+        }
+        updateSelectedColor()
+        invalidate()
+    }
 }
